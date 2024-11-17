@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating HTML Element using Javascript</title>
+
+    <style>
+        .Created_Tag {
+            background-color: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script>
+
+        const root = document.querySelector('#root')
+        const CreatedRoot = document.createElement('div');
+
+        const MainHeading = document.createElement('h1')
+        MainHeading.innerText = 'Welcome to the Sumit Blog'
+        MainHeading.classList.add('Created_Tag')
+        const cpara = document.createElement('p')
+        cpara.setAttribute('class', 'Created_Class')
+        cpara.innerText = 'this is a created paragraph'
+
+        CreatedRoot.append(MainHeading, cpara)
+
+        root.appendChild(CreatedRoot)
+
+    </script>
+</body>
+
+</html>
