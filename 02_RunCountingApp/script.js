@@ -17,17 +17,24 @@ function AddTwo() {
 
 // event handling
 function AddScore(num) {
-  score = score + num;
-  // here i reRander the element
-  Root.render(<App />);
+  if (wicket < 10) {
+    score = score + num;
+    // here i reRander the element
+    Root.render(<App />);
+  } else {
+    alert("Your Target is", score);
+  }
 }
 
-function Addwicket(num) {
-  wicket = wicket + num;
-  // here i reRander the element
-  Root.render(<App />);
+function Addwicket() {
+  if (wicket < 10) {
+    wicket = wicket + 1;
+    // here i reRander the element
+    Root.render(<App />);
+  }else{
+    alert("You have already lose 10 wickets");
+  }
 }
-
 
 // creating Element
 const App = () => {
@@ -39,15 +46,54 @@ const App = () => {
       </h2>
       <div className="Run-Veeket">
         {/* this two function is referance to the function  */}
-        <button onClick={AddOne}>1</button>
-        <button onClick={AddTwo}>2</button>
+        {/* <button onClick={AddOne}>1</button> */}
+        {/* <button onClick={AddTwo}>2</button> */}
+
+        <button
+          onClick={() => {
+            AddScore(1);
+          }}
+        >
+          1
+        </button>
+        <button
+          onClick={() => {
+            AddScore(2);
+          }}
+        >
+          2
+        </button>
 
         {/*this is callled event handling and this is alos inline function */}
-        <button onClick={()=>{AddScore(3)}} >3</button>
-        <button onClick={()=>{AddScore(4)}} >4</button>
-        <button onClick={()=>{AddScore(5)}} >5</button>
-        <button onClick={()=>{AddScore(6)}} >6</button>
-        <button onClick={()=>{Addwicket(1)}} >Wicket</button>
+        <button
+          onClick={() => {
+            AddScore(3);
+          }}
+        >
+          3
+        </button>
+        <button
+          onClick={() => {
+            AddScore(4);
+          }}
+        >
+          4
+        </button>
+        <button
+          onClick={() => {
+            AddScore(5);
+          }}
+        >
+          5
+        </button>
+        <button
+          onClick={() => {
+            AddScore(6);
+          }}
+        >
+          6
+        </button>
+        <button onClick={Addwicket}>Wicket</button>
       </div>
     </div>
   );
