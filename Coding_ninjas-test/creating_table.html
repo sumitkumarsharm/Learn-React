@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>React App</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        let formRef = React.createRef()
+        let studentRef = React.createRef()
+        let name;
+        let age
+        const handleForm = (event) => {
+            event.preventDefault()
+            age = formRef.current.value
+            name = studentRef.current.value
+            rootElement.render(<App />);
+
+        }
+
+
+        const Form = () => (
+            <>
+                <h1>Student's From</h1>
+                <form onSubmit={handleForm}>
+                    <input ref={studentRef} placeholder="Name" />
+                    <input ref={formRef} placeholder="Marks" type="range" />
+                    <button>Submit</button>
+                </form>
+            </>
+        )
+
+        const Result = () =>
+            <p>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Student'name</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{name}</td>
+                            <td>{age}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>;
+
+
+        const App = () => (
+            <>
+                <Form />
+                <Result />
+            </>
+        );
+
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+        rootElement.render(<App />);
+    </script>
+</body>
+
+</html>
