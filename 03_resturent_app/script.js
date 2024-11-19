@@ -61,7 +61,6 @@ const FavouriteFood = () => (
 
 const App = () => (
   <div className="App">
-   
     {favouriteFood && <FavouriteFood />}
     {typeof handleFoodClick === "function" && (
       <h2>Select your favourite food</h2>
@@ -69,7 +68,6 @@ const App = () => (
 
     <h2>Select your favourite food</h2>
     <div className="food-list">
-      {/* Refactor the onClick handlers below to use a single handler function */}
       <div onClick={handlePizzaClick}>
         <h3>{food.pizza.name}</h3>
         <img src={food.pizza.image} />
