@@ -2,13 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creating HTML Element using Javascript</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <title>React App</title>
     <style>
-        .Created_Tag {
-            background-color: red;
+        .card {
+            width: 250px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 50px auto;
+            background-color: rgb(236, 236, 236);
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 60%;
             margin: 0 auto;
         }
     </style>
@@ -17,23 +30,59 @@
 <body>
     <div id="root"></div>
 
+    <script type="text/babel">
+        // Do not change the classNames of the elements from the default markup
 
-    <script>
+        // Create the state variables for name, email, and about.
+        // Add onChange handlers for each input field to capture the user input.
 
-        const root = document.querySelector('#root')
-        const CreatedRoot = document.createElement('div');
 
-        const MainHeading = document.createElement('h1')
-        MainHeading.innerText = 'Welcome to the Sumit Blog'
-        MainHeading.classList.add('Created_Tag')
-        const cpara = document.createElement('p')
-        cpara.setAttribute('class', 'Created_Class')
-        cpara.innerText = 'this is a created paragraph'
+        let setname;
+        let setemail;
+        let setText;
+        const handleChange = (event) => {
+            setname = (event.target.value)
+            rootElement.render(<App />)
+        }
 
-        CreatedRoot.append(MainHeading, cpara)
+        const handleChanges = (event) => {
+            setemail = (event.target.value)
+            rootElement.render(<App />)
+        }
 
-        root.appendChild(CreatedRoot)
+        const handleChangies = (event) => {
+            setText = (event.target.value)
+            rootElement.render(<App />)
+        }
 
+
+
+        const Card = () => (
+            <div className="card">
+                {/* Display the values of name, email, and about dynamically */}
+
+                <h3>Name:{setname}</h3>
+                <p>Email:{setemail} </p>
+                <p>About:{setText} </p>
+            </div>
+        );
+
+        const App = () => (
+            <div className="App">
+                {/* TODO: Add the Card component here to render the user's input values (name, email, about).*/}
+                <Card />
+
+                <div className="inputs">
+                    {/* Add onChange event handlers to capture the input value */}
+                    <input type="text" onChange={handleChange} placeholder="Name" />
+                    <input onChange={handleChanges} type="email" placeholder="Email" />
+                    <textarea onChange={handleChangies} placeholder="About"></textarea>
+                </div>
+            </div>
+        );
+
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+        rootElement.render(<App />);
     </script>
 </body>
 
