@@ -1,50 +1,29 @@
 let score = 0;
 let wicket = 0;
 let BallwiseRes = [];
+let hit = 0;
+const inputRef = React.createRef();
 
-// // referance handling
-// function AddOne() {
-//   BallwiseRes.push()
-//   score = score + 1;
-//   Root.render(<App />);
-//   console.log(score);
-// }
-
-// function AddTwo() {
-//   score = score + 2;
-//   // here i reRander the element
-//   Root.render(<App />);
-//   console.log(score);
-// }
-
-// event handling
 function AddScore(num) {
-  if (wicket < 10) {
-    BallwiseRes.push(num);
-    score = score + num;
-    // here i reRander the element
-    Root.render(<App />);
-    console.log(BallwiseRes);
-  } else {
-    alert("Your Target is", score);
-  }
+  hit = num;
+
+  Root.render(<App />);
 }
 
 function Addwicket() {
-  if (wicket < 10) {
-    BallwiseRes.push('W');
-    wicket = wicket + 1;
-    // here i reRander the element
-    Root.render(<App />);
-    console.log(BallwiseRes);
-    
-  } else {
-    alert("You have already lose 10 wickets");
-  }
+  hit = "W";
+  Root.render(<App />);
 }
 
 const ScoreButtons = () => (
   <div className="Run-Veeket">
+    <button
+      onClick={() => {
+        AddScore(0);
+      }}
+    >
+      0
+    </button>
     <button
       onClick={() => {
         AddScore(1);
@@ -52,6 +31,8 @@ const ScoreButtons = () => (
     >
       1
     </button>
+
+    {/*this is callled event handling and this is alos inline function */}
     <button
       onClick={() => {
         AddScore(2);
@@ -59,8 +40,6 @@ const ScoreButtons = () => (
     >
       2
     </button>
-
-    {/*this is callled event handling and this is alos inline function */}
     <button
       onClick={() => {
         AddScore(3);
@@ -77,20 +56,52 @@ const ScoreButtons = () => (
     </button>
     <button
       onClick={() => {
-        AddScore(5);
-      }}
-    >
-      5
-    </button>
-    <button
-      onClick={() => {
         AddScore(6);
       }}
     >
       6
     </button>
-    <button onClick={Addwicket}>Wicket</button>
+    <button className="wicket" onClick={Addwicket}>
+      Wicket
+    </button>
   </div>
+);
+// crerting ball wise run function
+const Result = () => (
+  <div>
+    {BallwiseRes.map((res, index) => (
+      <>
+        {index % 6 === 0 ? <br /> : null}
+        <span key={index}>{res === 0 ? <strong>.</strong> : res}</span>
+      </>
+    ))}
+  </div>
+);
+// in form how to we do preventDefult()
+function hendleSubmit(event) {
+  event.preventDefault();
+  if (hit == "W") {
+    wicket += 1;
+  } else {
+    score += hit;
+  }
+  BallwiseRes.unshift(
+    // <span>{hit}{","}{inputRef.current.value}</span>
+    <span>{`${hit} , ${inputRef.current.value}`}</span>
+  );
+  hit = 0;
+  inputRef.current.value = "";
+  Root.render(<App />);
+  console.log(inputRef.current.value);
+}
+
+// creating form
+const Form = () => (
+  <form onSubmit={hendleSubmit}>
+    <input value={hit} />
+    <input ref={inputRef} placeholder="Add a comment" />
+    <button>Submit</button>
+  </form>
 );
 
 // creating Element
@@ -102,6 +113,13 @@ const App = () => {
         Score : {score}/{wicket}
       </h2>
       <ScoreButtons />
+      <br />
+      <br />
+      <Form />
+      <hr />
+      {BallwiseRes.map((res, index) => (
+        <p key={index}>{res}</p>
+      ))}
     </div>
   );
 };
