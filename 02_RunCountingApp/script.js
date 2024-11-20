@@ -75,7 +75,7 @@ const Result = () => (
         <span key={index}>{res === 0 ? <strong>.</strong> : res}</span>
       </>
     ))}
-  </div>
+  </div>  
 );
 // in form how to we do preventDefult()
 function hendleSubmit(event) {
